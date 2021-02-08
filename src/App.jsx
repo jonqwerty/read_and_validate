@@ -3,7 +3,7 @@ import Papa from 'papaparse'
 import Table from './table/Table'
 import ErrorRequiredFields from './table/ErrorRequiredFields'
 import ErrorType from './table/ErrorType'
-
+import file from './data/lawyerList.csv'
 
 
 const App = () => {
@@ -13,7 +13,8 @@ const App = () => {
 
 
   async function getType() {
-    const response = await fetch('/data/lawyersList.csv')
+    const response = await fetch(file)
+    
     console.log(response)
     const type = response.url.split('.').pop()
 
@@ -21,8 +22,8 @@ const App = () => {
   }
 
   async function getRows() {
-    const response = await fetch('/data/lawyersList.csv')
-    const type = response.url.split('.').pop()
+    
+    const response = await fetch(file)
     const reader = response.body.getReader()
     const result = await reader.read() // raw array
     const decoder = new TextDecoder('utf-8')
@@ -31,11 +32,14 @@ const App = () => {
     const rows_ = results.data // array of objects
     const rows = rows_.slice(0, -1)
 
+    console.log(results)
+    console.log(rows)
+
     setRows(rows)
   }
 
   useEffect(() => {
-
+    
     getType()
 
   }, [])

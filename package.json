@@ -1,8 +1,8 @@
 {
-  "name": "lawyers",
+  "name": "read_and_validate",
   "version": "0.1.0",
   "private": true,
-  "homepage": "",
+  "homepage": "https://jonqwerty.github.io/read_and_validate",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
