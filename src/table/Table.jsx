@@ -17,9 +17,65 @@ const errorStyle = {
   backgroundColor: 'pink',
 }
 
+const states = {
+  Alabama: 'AL',
+  Alaska: 'AK',
+  Arizona: 'AZ',
+  Arkansas: 'AR',
+  California: 'CA',
+  Colorado: 'CO',
+  Connecticut: 'CT',
+  Delaware: 'DE',
+  Florida: 'FL',
+  Georgia: 'GA',
+  Hawaii: 'HI',
+  Idaho: 'ID',
+  Illinois: 'IL',
+  Indiana: 'IN',
+  Iowa: 'IA',
+  Kansas: 'KS',
+  Kentucky: 'KY',
+  Louisiana: 'LA',
+  Maine: 'ME',
+  Maryland: 'MD',
+  Massachusetts: 'MA',
+  Michigan: 'MI',
+  Minnesota: 'MN',
+  Mississippi: 'MS',
+  Missouri: 'MO',
+  Montana: 'MT',
+  Nebraska: 'NE',
+  Nevada: 'NV',
+  'New Hampshire': 'NH',
+  'New Jersey': 'NJ',
+  'New Mexico': 'NM',
+  'New York': 'NY',
+  'North Carolina': 'NC',
+  'North Dakota': 'ND',
+  Ohio: 'OH',
+  Oklahoma: 'OK',
+  Oregon: 'OR',
+  Pennsylvania: 'PA',
+  'Rhode Island': 'RI',
+  'South Carolina': 'SC',
+  'South Dakota': 'SD',
+  Tennessee: 'TN',
+  Texas: 'TX',
+  Utah: 'UT',
+  Vermont: 'VT',
+  Virginia: 'VA',
+  Washington: 'WA',
+  'West Virginia': 'WV',
+  Wisconsin: 'WI',
+  Wyoming: 'WY',
+ 
+}
 
 
 const Table = (props) => {
+
+
+  
 
   // get curent date in format yyyy-mm-dd
   let today = new Date()
@@ -91,7 +147,14 @@ const Table = (props) => {
                 ? <td style={tbodyStyle}>{item.Haschildren.trim()}</td>
                 : <td style={errorStyle}>{item.Haschildren.trim()}</td>}
 
-              <td style={tbodyStyle}>{item.Licensestates.trim()}</td>
+              {item.Licensestates.trim().length === 2
+              ? <td style={tbodyStyle}>{item.Licensestates.trim()}</td>
+              : item.Licensestates.trim().length > 2 && item.Licensestates.trim().indexOf('|') === -1
+              ? <td style={tbodyStyle}>{ states[item.Licensestates.trim()] }</td>
+              : item.Licensestates.trim().length > 2 && item.Licensestates.trim().indexOf('|') !== -1
+              ? <td style={tbodyStyle}>{ item.Licensestates.trim() }</td>
+              : <td style={errorStyle}>{item.Licensestates.trim()}</td>}
+
 
               {item.Expirationdate.match(/\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/) && new Date(item.Expirationdate) < new Date(today)
                 ? <td style={tbodyStyle}>{item.Expirationdate.trim()}</td>
